@@ -3,9 +3,12 @@ package com.example.examenfinal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.mindorks.placeholderview.annotations.Click;
 
 public class MenuPrincipal extends AppCompatActivity {
 
@@ -20,9 +23,6 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    public void cARGARArticulos(View v)
-    {
-        Intent intent = new Intent(this, MainActivity_articulos.class);
-        startActivity(intent);
-    }
+
+
 }

@@ -3,6 +3,7 @@ package com.example.examenfinal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -20,6 +21,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +37,7 @@ public class pdfEdicion1 extends AppCompatActivity {
     private List<pdfEdicion> journalsArrayList;
     private RequestQueue requestQueue;
     private InfinitePlaceHolderView vsita;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +50,10 @@ public class pdfEdicion1 extends AppCompatActivity {
     private void Revistass(List<pdfEdicion> feedList1) {
         Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostrarItemsPdf.LOAD_VIEW_SET_COUNT);
         for (int i = 0; i < feedList1.size(); i++) {
-            vsita.addView(new vistasPdf(this.getApplicationContext(),feedList1.get(i)));
+            vsita.addView(new vistasPdf(this.getApplicationContext(), feedList1.get(i)));
         }
     }
+
     private void WebservicePdf() {
         journalsArrayList = new ArrayList<>();
         String url = "https://revistas.uteq.edu.ec/ws/pubs.php";
@@ -78,5 +89,36 @@ public class pdfEdicion1 extends AppCompatActivity {
                 }
         );
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void DescargarPDF() {
+        try {
+
+            URL url = new URL("https://revistas.uteq.edu.ec/ws/pubs.php");
+            HttpURLConnection c = (HttpURLConnection) url.openConnection();
+            c.setRequestMethod("GET");
+            c.setDoOutput(true);
+            c.connect();
+            String Path = Environment.getExternalStorageDirectory() + "/download/";
+            Log.v("PdfManager", "PATH: " + Path);
+            File file = new File(Path);
+            file.mkdirs();
+            FileOutputStream fos = new FileOutputStream("file.pdf");
+            InputStream is = c.getInputStream();
+            byte[] buffer = new byte[702];
+            int len1 = 0;
+            while ((len1 = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, len1);
+            }
+            fos.close();
+            is.close();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            Log.d("PdfManager", "Error: " + e);
+        }
+        Log.v("PdfManager", "Check: ");
     }
 }
