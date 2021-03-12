@@ -28,21 +28,21 @@ public class vistasArticulos {
     private TextView doi;
     @View(R.id.cover)
     private ImageView cover;
-    private articulos mInfo;
-    private Context mContext;
+    private articulos Info1;
+    private Context Context1;
     public vistasArticulos(Context context, articulos info) {
-        mContext = context;
-        mInfo = info;
+        Context1 = context;
+        Info1 = info;
     }
     @Resolve
     private void onResolved() {
-        volume.setText(mInfo.getVolume());
-        number.setText(mInfo.getNumber());
-        year1.setText(mInfo.getYear());
-        date_published.setText(mInfo.getDate_published());
-        title.setText(mInfo.getTitle());
-        doi.setText(mInfo.getDoi());
-        Glide.with(mContext).load(mInfo.getCover()).into(cover);
+        volume.setText(Info1.getVolume());
+        number.setText(Info1.getNumber());
+        year1.setText(Info1.getYear());
+        date_published.setText(Info1.getDate_published());
+        title.setText(Info1.getTitle());
+        doi.setText(Info1.getDoi());
+        Glide.with(Context1).load(Info1.getCover()).into(cover);
     }
 
 }

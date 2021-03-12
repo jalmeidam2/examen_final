@@ -22,10 +22,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 //REVISTA
-import com.example.examenfinal.MostarVistas.mostrarvistasitems;
-import com.example.examenfinal.Vistas.vistasItem;
+import com.example.examenfinal.MostarVistas.mostraritemsRevistas;
+import com.example.examenfinal.Vistas.vistasRevistas;
 //ARTICULOS
-import com.example.examenfinal.Vistas.vistasArticulos;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Revistass(List<Revistas> feedList) {
-        Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostrarvistasitems.LOAD_VIEW_SET_COUNT);
+        Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostraritemsRevistas.LOAD_VIEW_SET_COUNT);
         for (int i = 0; i < feedList.size(); i++) {
-            vsita.addView(new vistasItem(this.getApplicationContext(), feedList.get(i)));
+            vsita.addView(new vistasRevistas(this.getApplicationContext(), feedList.get(i)));
         }
     }
     private void WebserviceRevista() {

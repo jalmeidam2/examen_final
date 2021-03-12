@@ -13,7 +13,7 @@ import com.example.examenfinal.R;
 import com.example.examenfinal.models.Revistas;
 
 @Layout(R.layout.mostrarvistasitem)
-public class vistasItem {
+public class vistasRevistas {
 
     @View(R.id.name)
     private TextView nameTxt;
@@ -31,7 +31,7 @@ public class vistasItem {
 
     private Revistas mInfo;
     private Context mContext;
-    public vistasItem(Context context, Revistas info) {
+    public vistasRevistas(Context context, Revistas info) {
         mContext = context;
         mInfo = info;
     }

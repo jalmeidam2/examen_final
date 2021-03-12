@@ -11,9 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.examenfinal.MostarVistas.mostrarvistasitems;
+import com.example.examenfinal.MostarVistas.mostraritemsRevistas;
 import com.example.examenfinal.Vistas.vistasArticulos;
-import com.example.examenfinal.models.Revistas;
 import com.example.examenfinal.models.articulos;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
 
@@ -34,17 +33,16 @@ public class MainActivity_articulos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_articulos);
         requestQueue = Volley.newRequestQueue(this);
-        vsita = (InfinitePlaceHolderView) findViewById(R.id.loadMoreView);
+        vsita = (InfinitePlaceHolderView) findViewById(R.id.articulosVistas);
         WebserviceArticulos();
     }
     //MOSTRAR ARTICULOS
     private void Articuloss(List<articulos> feedList1) {
-        Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostrarvistasitems.LOAD_VIEW_SET_COUNT);
+        Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostraritemsRevistas.LOAD_VIEW_SET_COUNT);
         for (int i = 0; i < feedList1.size(); i++) {
             vsita.addView(new vistasArticulos(this.getApplicationContext(), feedList1.get(i)));
         }
     }
-
     private void WebserviceArticulos() {
         listaArticulos = new ArrayList<>();
         String url = "https://revistas.uteq.edu.ec/ws/issues.php";
