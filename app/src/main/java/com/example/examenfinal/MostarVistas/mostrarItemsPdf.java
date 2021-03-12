@@ -4,32 +4,28 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.example.examenfinal.R;
 import com.example.examenfinal.Vistas.vistasArticulos;
+import com.example.examenfinal.Vistas.vistasPdf;
 import com.example.examenfinal.models.articulos;
+import com.example.examenfinal.models.pdfEdicion;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
-import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.infinite.LoadMore;
 
 import java.util.List;
-@Layout(R.layout.mostrarvistas)
-public class mostarItemsArticulos {
 
+public class mostrarItemsPdf {
     public static final int LOAD_VIEW_SET_COUNT = 6;
 
     private InfinitePlaceHolderView Vista;
-    private List<articulos> Listar;
-
-    public mostarItemsArticulos(InfinitePlaceHolderView vistas, List<articulos> feedList1) {
+    private List<pdfEdicion> Listar;
+    public mostrarItemsPdf(InfinitePlaceHolderView vistas, List<pdfEdicion> feedList1) {
         this.Vista = vistas;
         this.Listar = feedList1;
     }
-
     class datos implements Runnable {
         public datos() {
             new Thread(this).start();
         }
-
         @Override
         public void run() {
             try {
@@ -43,10 +39,9 @@ public class mostarItemsArticulos {
                     int count = Vista.getViewCount();
                     Log.d("DEBUG", "count " + count);
                     for (int i = count - 1;
-                         i < (count - 1 + mostarItemsArticulos.LOAD_VIEW_SET_COUNT) && Listar.size() > i;
+                         i < (count - 1 + mostrarItemsPdf.LOAD_VIEW_SET_COUNT) && Listar.size() > i;
                          i++) {
-                        Vista.addView(new vistasArticulos(Vista.getContext(), Listar.get(i)));
-
+                        Vista.addView(new vistasPdf(Vista.getContext(),Listar.get(i)));
                         if (i == Listar.size() - 1) {
                             Vista.noMoreToLoad();
                             break;
@@ -60,7 +55,6 @@ public class mostarItemsArticulos {
     @LoadMore
     private void onLoadMore() {
         Log.d("DEBUG", "onLoadMore");
-        new datos();
+        new mostrarItemsPdf.datos();
     }
 }
-
