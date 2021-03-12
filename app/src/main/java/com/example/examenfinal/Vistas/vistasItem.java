@@ -29,12 +29,10 @@ public class vistasItem {
 
     private Revistas mInfo;
     private Context mContext;
-
     public vistasItem(Context context, Revistas info) {
         mContext = context;
         mInfo = info;
     }
-
     @Resolve
     private void onResolved() {
         nameTxt.setText(mInfo.getName());

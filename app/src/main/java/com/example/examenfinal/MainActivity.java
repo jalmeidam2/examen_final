@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < feedList.size(); i++){
             vsita.addView(new vistasItem(this.getApplicationContext(), feedList.get(i)));
         }
-        /* EVITANDO MOSTRAR EL OTRO DE MAS */
-        //mLoadMoreView.setLoadMoreResolver(new LoadMoreView(mLoadMoreView, feedList));
+
     }
     private void Webservice() {
         journalsArrayList = new ArrayList<>();
