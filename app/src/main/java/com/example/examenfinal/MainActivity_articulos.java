@@ -11,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.examenfinal.MostarVistas.mostrarvistasitems;
+import com.example.examenfinal.Vistas.vistasArticulos;
 import com.example.examenfinal.models.Revistas;
 import com.example.examenfinal.models.articulos;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
@@ -21,41 +23,32 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-//REVISTA
-import com.example.examenfinal.MostarVistas.mostrarvistasitems;
-import com.example.examenfinal.Vistas.vistasItem;
-//ARTICULOS
-import com.example.examenfinal.Vistas.vistasArticulos;
 
-
-public class MainActivity extends AppCompatActivity {
-
-    private Revistas revistas;
+public class MainActivity_articulos extends AppCompatActivity {
     private articulos articulos1;
-    private List<Revistas> journalsArrayList;
     private List<articulos> listaArticulos;
     private RequestQueue requestQueue;
     private InfinitePlaceHolderView vsita;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_articulos);
         requestQueue = Volley.newRequestQueue(this);
         vsita = (InfinitePlaceHolderView) findViewById(R.id.loadMoreView);
-        WebserviceRevista();
+        WebserviceArticulos();
     }
-
-    private void Revistass(List<Revistas> feedList) {
+    //MOSTRAR ARTICULOS
+    private void Articuloss(List<articulos> feedList1) {
         Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostrarvistasitems.LOAD_VIEW_SET_COUNT);
-        for (int i = 0; i < feedList.size(); i++) {
-            vsita.addView(new vistasItem(this.getApplicationContext(), feedList.get(i)));
+        for (int i = 0; i < feedList1.size(); i++) {
+            vsita.addView(new vistasArticulos(this.getApplicationContext(), feedList1.get(i)));
         }
     }
-    private void WebserviceRevista() {
-        journalsArrayList = new ArrayList<>();
-        String url = "https://revistas.uteq.edu.ec/ws/journals.php";
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
+
+    private void WebserviceArticulos() {
+        listaArticulos = new ArrayList<>();
+        String url = "https://revistas.uteq.edu.ec/ws/issues.php";
+        JsonArrayRequest jsonObjectRequest1 = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
                 null,
@@ -66,17 +59,17 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < size; i++) {
                             try {
                                 JSONObject jsonObject = new JSONObject(response.get(i).toString());
-                                revistas = new Revistas();
-                                revistas.setJournal_id(jsonObject.getString("journal_id"));
-                                revistas.setPortada(jsonObject.getString("portada"));
-                                revistas.setName(jsonObject.getString("name"));
-                                revistas.setDescription(jsonObject.getString("description"));
-                                journalsArrayList.add(revistas);
+                                articulos1 = new articulos();
+                                articulos1.setIssue_id(jsonObject.getString("issue_id"));
+                                articulos1.setCover(jsonObject.getString("cover"));
+                                articulos1.setYear(jsonObject.getString("year"));
+                                articulos1.setTitle(jsonObject.getString("title"));
+                                listaArticulos.add(articulos1);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                        Revistass(journalsArrayList);
+                        Articuloss(listaArticulos);
                     }
                 },
                 new Response.ErrorListener() {
@@ -86,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonObjectRequest1);
     }
-
-
 }

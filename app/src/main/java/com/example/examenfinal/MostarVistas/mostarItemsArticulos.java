@@ -4,8 +4,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.example.examenfinal.Vistas.vistasArticulos;
 import com.example.examenfinal.Vistas.vistasItem;
 import com.example.examenfinal.models.Revistas;
+import com.example.examenfinal.models.articulos;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
 import com.mindorks.placeholderview.annotations.infinite.LoadMore;
 
@@ -16,11 +18,11 @@ public class mostarItemsArticulos {
     public static final int LOAD_VIEW_SET_COUNT = 6;
 
     private InfinitePlaceHolderView Vista;
-    private List<Revistas> Listar;
+    private List<articulos> Listar;
 
-    public mostarItemsArticulos(InfinitePlaceHolderView loadMoreView, List<Revistas> feedList) {
+    public mostarItemsArticulos(InfinitePlaceHolderView loadMoreView, List<articulos> feedList1) {
         this.Vista = loadMoreView;
-        this.Listar = feedList;
+        this.Listar = feedList1;
     }
     @LoadMore
     private void onLoadMore(){
@@ -46,7 +48,7 @@ public class mostarItemsArticulos {
                     for (int i = count - 1;
                          i < (count - 1 + mostrarvistasitems.LOAD_VIEW_SET_COUNT) && Listar.size() > i;
                          i++) {
-                        Vista.addView(new vistasItem(Vista.getContext(), Listar.get(i)));
+                        Vista.addView(new vistasArticulos(Vista.getContext(), Listar.get(i)));
 
                         if(i == Listar.size() - 1){
                             Vista.noMoreToLoad();

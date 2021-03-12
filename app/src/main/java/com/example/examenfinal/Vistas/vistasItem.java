@@ -21,11 +21,13 @@ public class vistasItem {
     @View(R.id.abreviatura)
     private TextView abreviaturaTxt;
 
-    @View(R.id.journalid)
-    private TextView journalidTxt;
+    @View(R.id.descripcion)
+    private TextView descripcion;
 
     @View(R.id.portada)
     private ImageView portada;
+    @View(R.id.journalThumbnail)
+    private TextView journalThumbnail;
 
     private Revistas mInfo;
     private Context mContext;
@@ -37,7 +39,8 @@ public class vistasItem {
     private void onResolved() {
         nameTxt.setText(mInfo.getName());
         abreviaturaTxt.setText(mInfo.getAbbreviation());
-        journalidTxt.setText(mInfo.getJournal_id());
+        descripcion.setText(mInfo.getDescription());
+        journalThumbnail.setText(mInfo.getJournal_id());
         Glide.with(mContext).load(mInfo.getPortada()).into(portada);
     }
 
