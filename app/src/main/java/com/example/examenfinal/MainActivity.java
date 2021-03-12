@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         requestQueue = Volley.newRequestQueue(this);
         vsita = (InfinitePlaceHolderView)findViewById(R.id.loadMoreView);
-        getDataWebService();
+        Webservice();
     }
     private void setupView(List<Revistas> feedList){
         Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + mostrarvistasitems.LOAD_VIEW_SET_COUNT);
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         /* EVITANDO MOSTRAR EL OTRO DE MAS */
         //mLoadMoreView.setLoadMoreResolver(new LoadMoreView(mLoadMoreView, feedList));
     }
-    private void getDataWebService() {
+    private void Webservice() {
         journalsArrayList = new ArrayList<>();
         String url = "https://revistas.uteq.edu.ec/ws/journals.php";
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
