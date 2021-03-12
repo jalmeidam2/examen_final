@@ -16,7 +16,7 @@ public class vistasArticulos {
     private TextView number;
 
     @View(R.id.year)
-    private TextView year;
+    private TextView year1;
 
     @View(R.id.date_published)
     private ImageView date_published;
